@@ -5,16 +5,19 @@ mongoose.connect("mongodb://localhost:27017/testDB",{
       serverSelectionTimeoutMS:1000,
 }).then( async() =>{
       console.log('Database connected');
-      await createUser({
-            name:"Foysal",
-            email:"foysal@gmail.com",
-            phone:"01793310238"
-      });
-      await createUser({
-            name:"Naim",
-            email:"naim@gmail.com",
-            phone:"01793310238"
-      });
+      // await createUser({
+      //       name:"Foysal",
+      //       email:"foysal@gmail.com",
+      //       phone:"01793310238"
+      // });
+      // await createUser({
+      //       name:"Naim",
+      //       email:"naim@gmail.com",
+      //       phone:"01793310238"
+      // });
+
+      const users = await getAllUsers();
+      console.log(users);
 
       mongoose.connection.close(true);
 
@@ -52,4 +55,10 @@ async function createUser(data){
       await user.save();
       return user;
 }
+
+async function getAllUsers(){
+  const users = User.find();
+  return users;
+}
+
 
